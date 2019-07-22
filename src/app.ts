@@ -1,5 +1,5 @@
 import express from "express";
-import { IUser } from "./Models/user";
+import { IUser } from "./models/user";
 
 const app = express();
 const port = 3000;
