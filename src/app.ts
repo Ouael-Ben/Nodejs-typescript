@@ -1,19 +1,21 @@
+import dotenv from "dotenv";
 import express from "express";
-import { IUser } from "./models/user";
+import path from "path";
+
+import bodyParser from "body-parser";
+import { IUser } from "./Models/user";
+import routes from "./Routes";
+
+dotenv.config();
+
+const port = process.env.SERVER_PORT;
 
 const app = express();
-const port = 3000;
 
-app.get("/", (req, res) => {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-    const user: IUser = {
-        lastname: "ben",
-        name: "ouael",
-
-    };
-    res.setHeader("Content-Type", "application/json");
-    res.send(user);
-});
+app.use("/api/", routes);
 
 app.listen(port, () => {
     console.log(`Server listen on ${port}`);
